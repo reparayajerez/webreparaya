@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
   <meta name="theme-color" content="#0ea5e9"/>
   <title>ReparaYa! Jerez — Reparación de Dispositivos</title>
+  <link rel="icon" type="image/png" href="repara-ya-icono-web.png"/>
+  <link rel="apple-touch-icon" href="repara-ya-icono-web.png"/>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -41,19 +43,21 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
-      padding: 14px 20px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
     .nav-logo {
-      font-family: var(--display);
-      font-size: 1.5rem;
-      color: var(--text);
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      letter-spacing: 0.02em;
     }
-    .nav-logo span { color: var(--blue-mid); }
+    .nav-logo img {
+      height: 56px;
+      width: auto;
+      display: block;
+    }
     .nav-cta {
       display: inline-flex;
       align-items: center;
@@ -68,7 +72,6 @@
       text-decoration: none;
       border-radius: 6px;
       font-weight: 700;
-      transition: background 0.2s;
     }
     .nav-cta:active { background: var(--blue-dark); }
 
@@ -143,7 +146,6 @@
       font-weight: 700;
       text-decoration: none;
       border-radius: 8px;
-      transition: opacity 0.15s;
     }
     .btn-white:active { opacity: 0.85; }
     .btn-ghost {
@@ -162,7 +164,6 @@
       text-decoration: none;
       border: 1.5px solid rgba(255,255,255,0.4);
       border-radius: 8px;
-      transition: opacity 0.15s;
     }
     .btn-ghost:active { opacity: 0.75; }
 
@@ -196,7 +197,6 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 22px 18px;
-      transition: border-color 0.2s;
     }
     .card:active { border-color: var(--blue-mid); }
     .card-icon { font-size: 1.6rem; margin-bottom: 10px; display: block; }
@@ -208,9 +208,6 @@
       color: var(--text);
     }
     .card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
-
-    /* tarjeta ancha que ocupa las 2 columnas */
-    .card-wide { grid-column: 1 / -1; }
 
     /* ── PANTALLAS ── */
     #pantallas {
@@ -240,11 +237,7 @@
       border-radius: 3px;
       margin-bottom: 6px;
     }
-    .pcard-title {
-      font-family: var(--display);
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-    }
+    .pcard-title { font-family: var(--display); font-size: 1.2rem; margin-bottom: 4px; }
     .pcard-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
 
     /* ── CONTACTO ── */
@@ -271,7 +264,6 @@
       border-radius: 10px;
       text-decoration: none;
       color: #fff;
-      transition: background 0.15s;
     }
     .clink:active { background: rgba(255,255,255,0.25); }
     .clink-icon { font-size: 1.3rem; flex-shrink: 0; }
@@ -284,13 +276,9 @@
     }
     .clink-val { font-size: 0.9rem; color: #fff; margin-top: 1px; font-weight: 500; }
 
+    /* ── FORMULARIO ── */
     .cform { display: flex; flex-direction: column; gap: 14px; }
-    .cform-title {
-      font-family: var(--display);
-      font-size: 1.4rem;
-      color: #fff;
-      margin-bottom: 4px;
-    }
+    .cform-title { font-family: var(--display); font-size: 1.4rem; color: #fff; margin-bottom: 4px; }
     .flabel {
       font-family: var(--mono);
       font-size: 0.58rem;
@@ -330,10 +318,30 @@
       font-weight: 700;
       cursor: pointer;
       border-radius: 8px;
-      transition: opacity 0.15s;
       -webkit-appearance: none;
+      transition: opacity 0.15s;
     }
-    .fsubmit:active { opacity: 0.85; }
+    .fsubmit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .fsubmit:active:not(:disabled) { opacity: 0.85; }
+
+    .form-msg {
+      display: none;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-align: center;
+    }
+    .form-msg.ok {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+    }
+    .form-msg.error {
+      background: rgba(255,80,80,0.25);
+      border: 1px solid rgba(255,80,80,0.4);
+      color: #fff;
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -341,27 +349,26 @@
       padding: 28px 20px;
       text-align: center;
     }
-    .footer-logo { font-family: var(--display); font-size: 1.4rem; color: #fff; margin-bottom: 6px; }
-    .footer-logo span { color: var(--blue); }
+    .footer-logo img {
+      height: 44px;
+      width: auto;
+      display: block;
+      margin: 0 auto 8px;
+    }
     .footer-copy { font-family: var(--mono); font-size: 0.58rem; color: #475569; letter-spacing: 0.06em; }
 
     /* ── DESKTOP ── */
     @media (min-width: 768px) {
-      nav { padding: 16px 40px; }
-
+      nav { padding: 10px 40px; }
+      .nav-logo img { height: 64px; }
       .hero { padding: 80px 40px 90px; }
       .hero-btns { flex-direction: row; justify-content: center; }
       .btn-white, .btn-ghost { width: auto; padding: 14px 28px; }
-
       section { padding: 70px 40px; }
-
       .services-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-      .card-wide { grid-column: auto; }
-
       .pantallas-list { flex-direction: row; gap: 16px; }
       .pcard { flex-direction: column; flex: 1; }
       .pcard-emoji { font-size: 2rem; }
-
       #contacto .contact-inner {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -369,9 +376,14 @@
         align-items: start;
       }
       .fsubmit { width: auto; padding: 14px 32px; }
-
-      footer { display: flex; align-items: center; justify-content: space-between; padding: 24px 40px; text-align: left; }
-      .footer-logo { margin-bottom: 0; }
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 40px;
+        text-align: left;
+      }
+      .footer-logo img { margin: 0; }
     }
   </style>
 </head>
@@ -379,7 +391,9 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">ReparaYa<span>!</span> Jerez</a>
+    <a href="#" class="nav-logo">
+      <img src="reparaya-logo-png.png" alt="ReparaYa! Jerez"/>
+    </a>
     <a href="#contacto" class="nav-cta">Contactar →</a>
   </nav>
 
@@ -402,43 +416,36 @@
     <div class="sec-label">Servicios</div>
     <h2 class="sec-title">¿QUÉ HACEMOS?</h2>
     <div class="services-grid">
-
       <div class="card">
         <span class="card-icon">📱</span>
         <div class="card-title">Cambio de Pantalla</div>
         <p class="card-desc">Sustitución de pantallas rotas o con fallos táctiles en móviles. Disponemos de pantallas originales y OEM para la mayoría de modelos. Nos adaptamos siempre a tu presupuesto.</p>
       </div>
-
       <div class="card">
         <span class="card-icon">🔋</span>
         <div class="card-title">Cambio de Batería</div>
         <p class="card-desc">Si tu móvil no aguanta el día o se apaga solo, cambiamos la batería por una de calidad contrastada. Servicio rápido, normalmente en el mismo día.</p>
       </div>
-
       <div class="card">
         <span class="card-icon">🔌</span>
         <div class="card-title">Microcomponentes</div>
-        <p class="card-desc">Reparación y sustitución de piezas internas del móvil: conectores de carga, botones de volumen y encendido, altavoces, micrófonos y módulos de cámara. Sin soldadura de placa base.</p>
+        <p class="card-desc">Reparación y sustitución de piezas internas del móvil: conectores de carga, botones de volumen y encendido, altavoces, micrófonos y módulos de cámara.</p>
       </div>
-
       <div class="card">
         <span class="card-icon">🧹</span>
         <div class="card-title">Limpieza de PC</div>
-        <p class="card-desc">Desmontaje completo del equipo, limpieza de polvo en disipadores, ventiladores y filtros. Se renueva la pasta térmica del procesador y la gráfica para reducir temperaturas y mejorar el rendimiento.</p>
+        <p class="card-desc">Desmontaje completo del equipo, limpieza de polvo en disipadores, ventiladores y filtros. Se renueva la pasta térmica del procesador y la gráfica para reducir temperaturas.</p>
       </div>
-
       <div class="card">
         <span class="card-icon">🌡️</span>
         <div class="card-title">Pasta Térmica</div>
         <p class="card-desc">Cambio de pasta térmica en CPU y GPU. Imprescindible si tu equipo se calienta demasiado, va lento o los ventiladores van a tope. Alarga la vida útil de tus componentes.</p>
       </div>
-
       <div class="card">
         <span class="card-icon">🖥️</span>
         <div class="card-title">Montaje de PC</div>
         <p class="card-desc">¿Tienes las piezas y no sabes cómo montarlo? Me encargo del ensamblaje completo: instalación de componentes, gestión del cableado, instalación del sistema operativo y primera puesta en marcha.</p>
       </div>
-
     </div>
   </section>
 
@@ -503,43 +510,77 @@
         </div>
       </div>
 
+      <!-- FORMULARIO CON FORMSPREE -->
       <div class="cform">
         <div class="cform-title">Envía una consulta</div>
+        <div id="form-msg-ok" class="form-msg ok">✅ ¡Mensaje enviado! Te respondo lo antes posible.</div>
+        <div id="form-msg-error" class="form-msg error">❌ Algo salió mal. Prueba a escribirme directamente por Instagram o email.</div>
         <div>
-          <label class="flabel">Tu nombre</label>
-          <input type="text" class="finput" id="fname" placeholder="¿Cómo te llamas?" autocomplete="name"/>
+          <label class="flabel" for="fname">Tu nombre</label>
+          <input type="text" class="finput" id="fname" name="nombre" placeholder="¿Cómo te llamas?" autocomplete="name" required/>
         </div>
         <div>
-          <label class="flabel">Email o Instagram para responderte</label>
-          <input type="text" class="finput" id="fcontact" placeholder="Tu contacto" autocomplete="email"/>
+          <label class="flabel" for="fcontact">Email o Instagram para responderte</label>
+          <input type="text" class="finput" id="fcontact" name="contacto" placeholder="Tu contacto" autocomplete="email" required/>
         </div>
         <div>
-          <label class="flabel">¿Qué necesitas?</label>
-          <textarea class="ftextarea" id="fmsg" placeholder="Ej: Tengo un iPhone 13 con la pantalla rota, ¿cuánto saldría con pantalla original? También tengo un PC que se calienta mucho."></textarea>
+          <label class="flabel" for="fmsg">¿Qué necesitas?</label>
+          <textarea class="ftextarea" id="fmsg" name="mensaje" placeholder="Ej: Tengo un iPhone 13 con la pantalla rota, ¿cuánto saldría con pantalla original?" required></textarea>
         </div>
-        <button class="fsubmit" onclick="enviar()">Enviar consulta →</button>
+        <button class="fsubmit" id="fsubmit" type="button" onclick="enviar()">Enviar consulta →</button>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">ReparaYa<span>!</span> Jerez</div>
+    <div class="footer-logo">
+      <img src="logo.png" alt="ReparaYa! Jerez"/>
+    </div>
     <div class="footer-copy">© 2025 · Jerez de la Frontera, Cádiz</div>
   </footer>
 
   <script>
-    function enviar() {
-      const name = document.getElementById('fname').value.trim();
-      const contact = document.getElementById('fcontact').value.trim();
-      const msg = document.getElementById('fmsg').value.trim();
-      if (!name || !msg) {
-        alert('Por favor rellena tu nombre y cuéntame qué necesitas.');
+    async function enviar() {
+      const nombre   = document.getElementById('fname').value.trim();
+      const contacto = document.getElementById('fcontact').value.trim();
+      const mensaje  = document.getElementById('fmsg').value.trim();
+      const btn      = document.getElementById('fsubmit');
+      const msgOk    = document.getElementById('form-msg-ok');
+      const msgErr   = document.getElementById('form-msg-error');
+
+      msgOk.style.display  = 'none';
+      msgErr.style.display = 'none';
+
+      if (!nombre || !contacto || !mensaje) {
+        alert('Por favor rellena todos los campos antes de enviar.');
         return;
       }
-      const subject = encodeURIComponent('Consulta ReparaYa! Jerez — ' + name);
-      const body = encodeURIComponent('Nombre: ' + name + '\nContacto: ' + contact + '\n\nConsulta:\n' + msg);
-      window.location.href = 'mailto:reparaya.jerez@gmail.com?subject=' + subject + '&body=' + body;
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      try {
+        const res = await fetch('https://formspree.io/f/xwvreajr', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ nombre, contacto, mensaje })
+        });
+
+        if (res.ok) {
+          msgOk.style.display = 'block';
+          document.getElementById('fname').value    = '';
+          document.getElementById('fcontact').value = '';
+          document.getElementById('fmsg').value     = '';
+          btn.textContent = 'Enviado ✓';
+        } else {
+          throw new Error('error');
+        }
+      } catch {
+        msgErr.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Enviar consulta →';
+      }
     }
   </script>
 </body>
