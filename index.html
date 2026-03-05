@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#0ea5e9"/>
+  <title>ReparaYa! Jerez — Reparación de Dispositivos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f0f9ff;
+      --white: #ffffff;
+      --blue: #38bdf8;
+      --blue-mid: #0ea5e9;
+      --blue-dark: #0369a1;
+      --text: #0c1a2e;
+      --muted: #64748b;
+      --border: #bae6fd;
+      --display: 'Bebas Neue', sans-serif;
+      --body: 'DM Sans', sans-serif;
+      --mono: 'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      overflow-x: hidden;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--blue-mid); }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue-mid);
+      color: #fff;
+      padding: 9px 18px;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .nav-cta:active { background: var(--blue-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(145deg, #0369a1 0%, #0ea5e9 55%, #38bdf8 100%);
+      padding: 52px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(4rem, 18vw, 6.5rem);
+      line-height: 0.88;
+      color: #fff;
+      position: relative;
+      letter-spacing: 0.01em;
+    }
+    .hero-sub {
+      margin: 18px auto 0;
+      max-width: 340px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.7;
+      font-weight: 300;
+      position: relative;
+    }
+    .hero-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 28px;
+      position: relative;
+    }
+    .btn-white {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--blue-dark);
+      padding: 15px 24px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: opacity 0.15s;
+    }
+    .btn-white:active { opacity: 0.85; }
+    .btn-ghost {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 15px 24px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 8px;
+      transition: opacity 0.15s;
+    }
+    .btn-ghost:active { opacity: 0.75; }
+
+    /* ── SECTIONS ── */
+    section { padding: 52px 20px; }
+    .sec-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      margin-bottom: 8px;
+    }
+    .sec-title {
+      font-family: var(--display);
+      font-size: clamp(2rem, 7vw, 2.6rem);
+      line-height: 1;
+      margin-bottom: 28px;
+      color: var(--text);
+    }
+
+    /* ── SERVICIOS ── */
+    #servicios { background: var(--white); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 18px;
+      transition: border-color 0.2s;
+    }
+    .card:active { border-color: var(--blue-mid); }
+    .card-icon { font-size: 1.6rem; margin-bottom: 10px; display: block; }
+    .card-title {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .card-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+    /* tarjeta ancha que ocupa las 2 columnas */
+    .card-wide { grid-column: 1 / -1; }
+
+    /* ── PANTALLAS ── */
+    #pantallas {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .pantallas-list { display: flex; flex-direction: column; gap: 12px; }
+    .pcard {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .pcard-emoji { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
+    .pcard-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #e0f2fe;
+      color: var(--blue-dark);
+      padding: 3px 8px;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+    .pcard-title {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+    .pcard-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── CONTACTO ── */
+    #contacto {
+      background: linear-gradient(145deg, #0369a1 0%, #0ea5e9 100%);
+    }
+    #contacto .sec-label { color: rgba(255,255,255,0.65); }
+    #contacto .sec-title { color: #fff; }
+    .contact-sub {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .clink {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 10px;
+      text-decoration: none;
+      color: #fff;
+      transition: background 0.15s;
+    }
+    .clink:active { background: rgba(255,255,255,0.25); }
+    .clink-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .clink-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .clink-val { font-size: 0.9rem; color: #fff; margin-top: 1px; font-weight: 500; }
+
+    .cform { display: flex; flex-direction: column; gap: 14px; }
+    .cform-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .flabel {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .finput, .ftextarea {
+      width: 100%;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 8px;
+      color: #fff;
+      padding: 14px 16px;
+      font-family: var(--body);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+      -webkit-appearance: none;
+    }
+    .finput::placeholder, .ftextarea::placeholder { color: rgba(255,255,255,0.35); }
+    .finput:focus, .ftextarea:focus { border-color: rgba(255,255,255,0.7); }
+    .ftextarea { min-height: 100px; }
+    .fsubmit {
+      width: 100%;
+      background: #fff;
+      color: var(--blue-dark);
+      border: none;
+      padding: 16px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: opacity 0.15s;
+      -webkit-appearance: none;
+    }
+    .fsubmit:active { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0c1a2e;
+      padding: 28px 20px;
+      text-align: center;
+    }
+    .footer-logo { font-family: var(--display); font-size: 1.4rem; color: #fff; margin-bottom: 6px; }
+    .footer-logo span { color: var(--blue); }
+    .footer-copy { font-family: var(--mono); font-size: 0.58rem; color: #475569; letter-spacing: 0.06em; }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 768px) {
+      nav { padding: 16px 40px; }
+
+      .hero { padding: 80px 40px 90px; }
+      .hero-btns { flex-direction: row; justify-content: center; }
+      .btn-white, .btn-ghost { width: auto; padding: 14px 28px; }
+
+      section { padding: 70px 40px; }
+
+      .services-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .card-wide { grid-column: auto; }
+
+      .pantallas-list { flex-direction: row; gap: 16px; }
+      .pcard { flex-direction: column; flex: 1; }
+      .pcard-emoji { font-size: 2rem; }
+
+      #contacto .contact-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: start;
+      }
+      .fsubmit { width: auto; padding: 14px 32px; }
+
+      footer { display: flex; align-items: center; justify-content: space-between; padding: 24px 40px; text-align: left; }
+      .footer-logo { margin-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">ReparaYa<span>!</span> Jerez</a>
+    <a href="#contacto" class="nav-cta">Contactar →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">📍 Jerez de la Frontera</div>
+    <h1 class="hero-title">REPARA<br>YA!</h1>
+    <p class="hero-sub">Reparamos tu móvil, montamos tu PC y lo mantenemos a punto. Rápido, cercano y sin complicaciones.</p>
+    <div class="hero-btns">
+      <a href="https://instagram.com/reparaya.jerez" target="_blank" class="btn-white">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+      <a href="#contacto" class="btn-ghost">Enviar consulta →</a>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <div class="sec-label">Servicios</div>
+    <h2 class="sec-title">¿QUÉ HACEMOS?</h2>
+    <div class="services-grid">
+
+      <div class="card">
+        <span class="card-icon">📱</span>
+        <div class="card-title">Cambio de Pantalla</div>
+        <p class="card-desc">Sustitución de pantallas rotas o con fallos táctiles en móviles. Disponemos de pantallas originales y OEM para la mayoría de modelos. Nos adaptamos siempre a tu presupuesto.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🔋</span>
+        <div class="card-title">Cambio de Batería</div>
+        <p class="card-desc">Si tu móvil no aguanta el día o se apaga solo, cambiamos la batería por una de calidad contrastada. Servicio rápido, normalmente en el mismo día.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🔌</span>
+        <div class="card-title">Microcomponentes</div>
+        <p class="card-desc">Reparación y sustitución de piezas internas del móvil: conectores de carga, botones de volumen y encendido, altavoces, micrófonos y módulos de cámara. Sin soldadura de placa base.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🧹</span>
+        <div class="card-title">Limpieza de PC</div>
+        <p class="card-desc">Desmontaje completo del equipo, limpieza de polvo en disipadores, ventiladores y filtros. Se renueva la pasta térmica del procesador y la gráfica para reducir temperaturas y mejorar el rendimiento.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🌡️</span>
+        <div class="card-title">Pasta Térmica</div>
+        <p class="card-desc">Cambio de pasta térmica en CPU y GPU. Imprescindible si tu equipo se calienta demasiado, va lento o los ventiladores van a tope. Alarga la vida útil de tus componentes.</p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🖥️</span>
+        <div class="card-title">Montaje de PC</div>
+        <p class="card-desc">¿Tienes las piezas y no sabes cómo montarlo? Me encargo del ensamblaje completo: instalación de componentes, gestión del cableado, instalación del sistema operativo y primera puesta en marcha.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PANTALLAS -->
+  <section id="pantallas">
+    <div class="sec-label">Tipos de pantalla</div>
+    <h2 class="sec-title">ELIGE LA QUE<br>TE CONVIENE</h2>
+    <div class="pantallas-list">
+      <div class="pcard">
+        <span class="pcard-emoji">⭐</span>
+        <div>
+          <span class="pcard-badge">Original</span>
+          <div class="pcard-title">ORIGINAL</div>
+          <p class="pcard-desc">Fabricada directamente por el fabricante del dispositivo. Máxima fidelidad de color, brillo, respuesta táctil y durabilidad. La mejor opción si quieres exactamente lo que tenías.</p>
+        </div>
+      </div>
+      <div class="pcard">
+        <span class="pcard-emoji">🏭</span>
+        <div>
+          <span class="pcard-badge">OEM</span>
+          <div class="pcard-title">OEM</div>
+          <p class="pcard-desc">Fabricada en las mismas líneas de producción pero sin el branding oficial. Calidad muy similar a la original a un precio más ajustado. Relación calidad-precio muy buena.</p>
+        </div>
+      </div>
+      <div class="pcard">
+        <span class="pcard-emoji">💡</span>
+        <div>
+          <span class="pcard-badge">Flexible</span>
+          <div class="pcard-title">ME ADAPTO</div>
+          <p class="pcard-desc">Cuéntame tu situación y presupuesto. Te explico con honestidad las diferencias entre opciones para que elijas sin sorpresas. Siempre hay una solución que encaja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="sec-label">Contacto</div>
+    <h2 class="sec-title">HABLEMOS</h2>
+    <div class="contact-inner">
+      <div>
+        <p class="contact-sub">¿Pantalla rota, batería agotada, PC lento o quieres montar un equipo desde cero? Escríbeme sin compromiso — te respondo rápido y buscamos la mejor solución para ti.</p>
+        <div class="contact-links">
+          <a href="https://instagram.com/reparaya.jerez" target="_blank" class="clink">
+            <span class="clink-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </span>
+            <div>
+              <div class="clink-label">Instagram</div>
+              <div class="clink-val">@reparaya.jerez</div>
+            </div>
+          </a>
+          <a href="mailto:reparaya.jerez@gmail.com" class="clink">
+            <span class="clink-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            <div>
+              <div class="clink-label">Email</div>
+              <div class="clink-val">reparaya.jerez@gmail.com</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="cform">
+        <div class="cform-title">Envía una consulta</div>
+        <div>
+          <label class="flabel">Tu nombre</label>
+          <input type="text" class="finput" id="fname" placeholder="¿Cómo te llamas?" autocomplete="name"/>
+        </div>
+        <div>
+          <label class="flabel">Email o Instagram para responderte</label>
+          <input type="text" class="finput" id="fcontact" placeholder="Tu contacto" autocomplete="email"/>
+        </div>
+        <div>
+          <label class="flabel">¿Qué necesitas?</label>
+          <textarea class="ftextarea" id="fmsg" placeholder="Ej: Tengo un iPhone 13 con la pantalla rota, ¿cuánto saldría con pantalla original? También tengo un PC que se calienta mucho."></textarea>
+        </div>
+        <button class="fsubmit" onclick="enviar()">Enviar consulta →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">ReparaYa<span>!</span> Jerez</div>
+    <div class="footer-copy">© 2025 · Jerez de la Frontera, Cádiz</div>
+  </footer>
+
+  <script>
+    function enviar() {
+      const name = document.getElementById('fname').value.trim();
+      const contact = document.getElementById('fcontact').value.trim();
+      const msg = document.getElementById('fmsg').value.trim();
+      if (!name || !msg) {
+        alert('Por favor rellena tu nombre y cuéntame qué necesitas.');
+        return;
+      }
+      const subject = encodeURIComponent('Consulta ReparaYa! Jerez — ' + name);
+      const body = encodeURIComponent('Nombre: ' + name + '\nContacto: ' + contact + '\n\nConsulta:\n' + msg);
+      window.location.href = 'mailto:reparaya.jerez@gmail.com?subject=' + subject + '&body=' + body;
+    }
+  </script>
+</body>
+</html>
